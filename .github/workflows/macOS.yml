@@ -12,7 +12,11 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Checkout code
+      - name: Checkout code`
         uses: actions/checkout@v2
       - name: Build
         run: go build -o smimesign -ldflags "-X main.versionString=0.0.1" . && tar czf smimesign-0.0.1-macos.tgz smimesign && go test -v ./...
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macos-smimesign
+          path: smimesign
